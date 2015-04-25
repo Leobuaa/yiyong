@@ -67,11 +67,17 @@ use \core\router,
 Router::any('', '\controllers\welcome@index');
 Router::any('/subpage', '\controllers\welcome@subpage');
 
-//易用会员管理系统 routes
+//管理员 routes
 Router::post('/adminRegister', '\controllers\admin@register');
 Router::post('/adminLogin', '\controllers\admin@login');
 Router::any('/adminLogout', '\controllers\admin@logout');
 Router::any('/adminIsLogin', '\controllers\admin@isLogin');
+
+//产品类别 routes
+Router::any('/getProductCategory', '\controllers\productcategory@get');
+Router::any('/addProductCategory', '\controllers\productcategory@add');
+Router::any('/deleteProductCategory', '\controllers\productcategory@delete');
+Router::any('/updateProductCategory', '\controllers\productcategory@update');
 
 //if no route found
 Router::error('\core\error@index');

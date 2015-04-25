@@ -1,5 +1,28 @@
 <h3>Exception information:</h3>
 
+		<p><strong>Date:</strong> Apr 25, 2015 15:24PM</p>
+
+		<p><strong>Message:</strong> SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: 5f</p>
+
+		<p><strong>Code:</strong> 42000</p>
+
+		<p><strong>File:</strong> /Users/leo/Documents/code/yiyong/app/helpers/database.php</p>
+
+		<p><strong>Line:</strong> 87</p>
+
+		<h3>Stack trace:</h3>
+
+		<pre>#0 /Users/leo/Documents/code/yiyong/app/helpers/database.php(87): PDOStatement->execute()
+#1 /Users/leo/Documents/code/yiyong/app/models/productcategory.php(11): helpers\Database->select('SELECT * FROM p...')
+#2 /Users/leo/Documents/code/yiyong/app/controllers/productcategory.php(43): models\ProductCategory->get(Array)
+#3 /Users/leo/Documents/code/yiyong/app/core/router.php(85): controllers\ProductCategory->get()
+#4 /Users/leo/Documents/code/yiyong/app/core/router.php(219): core\Router::invokeObject('\\controllers\\pr...', Array)
+#5 /Users/leo/Documents/code/yiyong/index.php(86): core\Router::dispatch()
+#6 {main}</pre>
+
+		<hr />
+<h3>Exception information:</h3>
+
 		<p><strong>Date:</strong> Apr 25, 2015 12:28PM</p>
 
 		<p><strong>Message:</strong> SQLSTATE[42S22]: Column not found: 1054 Unknown column 'username' in 'field list'</p>
