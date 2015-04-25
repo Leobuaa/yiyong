@@ -67,7 +67,11 @@ use \core\router,
 Router::any('', '\controllers\welcome@index');
 Router::any('/subpage', '\controllers\welcome@subpage');
 
-
+//易用会员管理系统 routes
+Router::post('/adminRegister', '\controllers\admin@register');
+Router::post('/adminLogin', '\controllers\admin@login');
+Router::any('/adminLogout', '\controllers\admin@logout');
+Router::any('/adminIsLogin', '\controllers\admin@isLogin');
 
 //if no route found
 Router::error('\core\error@index');
