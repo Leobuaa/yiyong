@@ -3,7 +3,9 @@ app/core/config.php
 
 # 项目中与开发无关的文件
 .DS_Store
-#errorlog.html
-#.htaccess
+errorlog.html
+license.txt
+README-smvc.md
+.htaccess
 .idea/*
 documentation/*
