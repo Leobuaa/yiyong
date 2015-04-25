@@ -1,0 +1,9 @@
+# 项目的配置文件
+app/core/config.php
+
+# 项目中与开发无关的文件
+.DS_Store
+#errorlog.html
+#.htaccess
+.idea/*
+documentation/*
