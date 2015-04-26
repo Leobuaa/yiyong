@@ -85,6 +85,12 @@ Router::any('/addProductVersion', '\controllers\productversion@add');
 Router::any('/deleteProductVersion', '\controllers\productversion@delete');
 Router::any('/updateProductVersion', '\controllers\productversion@update');
 
+//消费类别 routes
+Router::any('/getConsumptionType', '\controllers\consumptiontype@get');
+Router::any('/addConsumptionType', '\controllers\consumptiontype@add');
+Router::any('/deleteConsumptionType', '\controllers\consumptiontype@delete');
+Router::any('/updateConsumptionType', '\controllers\consumptiontype@update');
+
 //if no route found
 Router::error('\core\error@index');
 
