@@ -79,6 +79,12 @@ Router::any('/addProductCategory', '\controllers\productcategory@add');
 Router::any('/deleteProductCategory', '\controllers\productcategory@delete');
 Router::any('/updateProductCategory', '\controllers\productcategory@update');
 
+//产品版本 routes
+Router::any('/getProductVersion', '\controllers\productversion@get');
+Router::any('/addProductVersion', '\controllers\productversion@add');
+Router::any('/deleteProductVersion', '\controllers\productversion@delete');
+Router::any('/updateProductVersion', '\controllers\productversion@update');
+
 //if no route found
 Router::error('\core\error@index');
 

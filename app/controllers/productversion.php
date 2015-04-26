@@ -1,11 +1,6 @@
 <?php namespace controllers;
 
-/**
- * 产品类别控制类
- * Class ProductCategory
- * @package controllers
- */
-class ProductCategory extends \core\controller {
+class ProductVersion extends \core\controller {
 
     private $model;
     private $response;
@@ -13,31 +8,34 @@ class ProductCategory extends \core\controller {
 
     public function __construct() {
         parent::__construct();
-        $this->model = new \models\productcategory();
+        $this->model = new \models\productversion();
         $this->response = array(
             'success' => false,
             'msg' => ' ',
         );
         $this->responseMsg = array(
-            'dataIsNotValid' => '输入的数据格式有误',
-            'getSucceed' => '获取产品类别成功',
-            'getFailed' => '获取产品类别失败',
-            'addSucceed' => '添加产品类别成功',
-            'addFailed' => '添加产品类别失败',
-            'deleteSucceed' => '删除产品类别及改产品类别下的产品版本成功',
-            'deleteFailed' => '删除产品类别失败',
-            'updateSucceed' => '更新产品类别成功',
-            'updateFailed' => '更新产品类别失败',
+            'dataIsNotValid' => '输入数据格式有误',
+            'getSucceed' => '获取产品版本成功',
+            'getFailed' => '获取产品版本失败',
+            'addSucceed' => '添加产品版本成功',
+            'addFailed' => '添加产品版本失败',
+            'deleteSucceed' => '删除产品版本成功',
+            'deleteFailed' => '删除产品版本失败',
+            'updateSucceed' => '更新产品版本成功',
+            'updateFailed' => '更新产品版本失败',
         );
         header("Content-Type: application/json;charset=UTF-8"); // 将返回的结果设置为json格式
     }
 
     public function get() {
-        $data = \helpers\parameter::getParameter(array('page', 'size'));
-        if ($data['page'] == null) $data['page'] = 1;   // 若未传参则设定默认值
+        $data = \helpers\parameter::getParameter(array('categoryId', 'page', 'size'));
+
+        if ($data['page'] == null) $data['page'] = 1; // 若未传递参数则设定默认值
         if ($data['size'] == null) $data['size'] = 10;
+        if ($data['categoryId'] == null) $data['categoryId'] = 0;
 
         $isValid = \helpers\gump::is_valid($data, array(
+            'categoryId' => 'required|integer',
             'page' => 'required|integer',
             'size' => 'required|integer',
         )); // 检验传递数据的有效性
@@ -47,19 +45,22 @@ class ProductCategory extends \core\controller {
             $this->response['msg'] = $this->responseMsg['getSucceed'];
             $this->response['data'] = $this->model->get($data);
         } else {
-            $this->response['msg'] = $this->responseMsg['dataIsNotValid'];
+            $this->response['msg'] = $this->responseMsg['getFailed'];
         }
 
         echo json_encode($this->response);
     }
 
     public function add() {
-        $data = \helpers\parameter::getParameter(array('name'));
+        $data = \helpers\parameter::getParameter(array('categoryId', 'name'));
 
-        $isValid = \helpers\gump::is_valid($data, array('name' => 'required'));
+        $isValid = \helpers\gump::is_valid($data, array(
+            'categoryId' => 'required|integer',
+            'name' => 'required',
+        ));
 
         if ($isValid === true) {
-            if ($this->model->add($data)){
+            if ($this->model->add($data)) {
                 $this->response['success'] = true;
                 $this->response['msg'] = $this->responseMsg['addSucceed'];
                 echo json_encode($this->response);
@@ -90,10 +91,11 @@ class ProductCategory extends \core\controller {
     }
 
     public function update() {
-        $data = \helpers\parameter::getParameter(array('id', 'name'));
+        $data = \helpers\parameter::getParameter(array('id', 'categoryId', 'name'));
 
         $isValid = \helpers\gump::is_valid($data, array(
             'id' => 'required|integer',
+            'categoryId' => 'required|integer',
             'name' => 'required',
         ));
 

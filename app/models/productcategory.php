@@ -19,11 +19,9 @@ class ProductCategory extends \core\model {
         $id = $data['id'];
 
         if ($this->isExist($id)) {
-            // 删除该产品类别下的所有产品版本
             $statement = "DELETE FROM product_version WHERE category_id = $id";
-            $this->_db->exec($statement);
-            // 删除该产品类别
-            $this->_db->delete('product_category', $data);
+            $this->_db->exec($statement); // 删除该产品类别下的所有产品版本
+            $this->_db->delete('product_category', $data); // 删除该产品类别
             return true;
         } else {
             return false;
@@ -41,6 +39,11 @@ class ProductCategory extends \core\model {
         }
     }
 
+    /**
+     * 判断改产品类别是否存在, 在删除与更新时候均需要用到
+     * @param $id
+     * @return bool
+     */
     private function isExist($id) {
         if (count($this->_db->select("SELECT id FROM product_category WHERE id = :id", array(':id' => $id))) > 0)
             return true;
