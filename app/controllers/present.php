@@ -1,11 +1,6 @@
 <?php namespace controllers;
 
-/**
- * 消费类别控制类
- * Class ConsumptionType
- * @package controllers
- */
-class ConsumptionType extends \core\controller {
+class Present extends \core\controller {
 
     private $model;
     private $response;
@@ -13,21 +8,21 @@ class ConsumptionType extends \core\controller {
 
     public function __construct() {
         parent::__construct();
-        $this->model = new \models\consumptiontype();
+        $this->model = new \models\present();
         $this->response = array(
             'success' => false,
             'msg' => ' ',
         );
         $this->responseMsg = array(
             'dataIsNotValid' => '输入的数据格式有误',
-            'getSucceed' => '获取消费类别成功',
-            'getFailed' => '获取消费类别失败',
-            'addSucceed' => '添加消费类别成功',
-            'addFailed' => '添加消费类别失败',
-            'deleteSucceed' => '删除消费类别成功',
-            'deleteFailed' => '删除消费类别失败',
-            'updateSucceed' => '更新消费类别成功',
-            'updateFailed' => '更新消费类别失败',
+            'getSucceed' => '获取礼品成功',
+            'getFailed' => '获取礼品失败',
+            'addSucceed' => '添加礼品成功',
+            'addFailed' => '添加礼品失败',
+            'deleteSucceed' => '删除礼品成功',
+            'deleteFailed' => '删除礼品失败',
+            'updateSucceed' => '更新礼品成功',
+            'updateFailed' => '更新礼品失败',
         );
     }
 
@@ -54,9 +49,16 @@ class ConsumptionType extends \core\controller {
     }
 
     public function add() {
-        $data = \helpers\parameter::getParameter(array('name'));
+        $data = \helpers\parameter::getParameter(array('name', 'description', 'credit'));
 
-        $isValid = \helpers\gump::is_valid($data, array('name' => 'required'));
+        // todo 存储图片
+        $data['picture_url'] = '';
+
+        $isValid = \helpers\gump::is_valid($data, array(
+            'name' => 'required',
+            'credit' => 'required|integer',
+            'picture_url' => 'required',
+        ));
 
         if ($isValid === true) {
             if ($this->model->add($data)) {
@@ -90,11 +92,15 @@ class ConsumptionType extends \core\controller {
     }
 
     public function update() {
-        $data = \helpers\parameter::getParameter(array('id', 'name'));
+        $data = \helpers\parameter::getParameter(array('name', 'description', 'credit'));
+
+        // todo 存储图片
+        $data['picture_url'] = '';
 
         $isValid = \helpers\gump::is_valid($data, array(
-           'id' => 'required|integer',
-           'name' => 'required',
+            'name' => 'required',
+            'credit' => 'required|integer',
+            'picture_url' => 'required',
         ));
 
         if ($isValid === true) {
@@ -108,5 +114,9 @@ class ConsumptionType extends \core\controller {
 
         $this->response['msg'] = $this->responseMsg['updateFailed'];
         echo json_encode($this->response);
+    }
+
+    private function saveImg() {
+
     }
 }

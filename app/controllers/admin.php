@@ -28,7 +28,6 @@ class Admin extends \core\controller {
             'isLogin' => '管理员已经登录',
             'isNotLogin' => '管理员尚未登录',
         );
-        header("Content-Type: application/json;charset=UTF-8"); // 将返回的结果设置为json格式
     }
 
     public function register() {

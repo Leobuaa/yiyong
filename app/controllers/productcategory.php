@@ -29,7 +29,6 @@ class ProductCategory extends \core\controller {
             'updateSucceed' => '更新产品类别成功',
             'updateFailed' => '更新产品类别失败',
         );
-        header("Content-Type: application/json;charset=UTF-8"); // 将返回的结果设置为json格式
     }
 
     public function get() {

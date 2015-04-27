@@ -24,7 +24,6 @@ class ProductVersion extends \core\controller {
             'updateSucceed' => '更新产品版本成功',
             'updateFailed' => '更新产品版本失败',
         );
-        header("Content-Type: application/json;charset=UTF-8"); // 将返回的结果设置为json格式
     }
 
     public function get() {

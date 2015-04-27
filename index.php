@@ -91,6 +91,12 @@ Router::any('/addConsumptionType', '\controllers\consumptiontype@add');
 Router::any('/deleteConsumptionType', '\controllers\consumptiontype@delete');
 Router::any('/updateConsumptionType', '\controllers\consumptiontype@update');
 
+//礼品 routes
+Router::any('/getPresent', '\controllers\present@get');
+Router::any('/addPresent', '\controllers\present@add');
+Router::any('/deletePresent', '\controllers\present@delete');
+Router::any('/updatePresent', '\controllers\present@update');
+
 //if no route found
 Router::error('\core\error@index');
 
