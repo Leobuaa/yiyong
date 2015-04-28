@@ -31,7 +31,7 @@ abstract class Controller {
 		$this->language = new Language();
 
 		header("Content-Type: application/json;charset=UTF-8"); // 将返回的结果设置为json格式
-		header("Access-Control-Allow-Origin:*"); // 暂时将允许链接所有的访问
+		//header("Access-Control-Allow-Origin:*"); // 暂时将允许链接所有的访问
 	}
 
 }
