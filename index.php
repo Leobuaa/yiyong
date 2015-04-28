@@ -97,6 +97,12 @@ Router::any('/addPresent', '\controllers\present@add');
 Router::any('/deletePresent', '\controllers\present@delete');
 Router::any('/updatePresent', '\controllers\present@update');
 
+//兑换规则 routes
+Router::any('/getRule', '\controllers\rule@get');
+Router::any('/addRule', '\controllers\rule@add');
+Router::any('/deleteRule', '\controllers\rule@delete');
+Router::any('/updateRule', '\controllers\rule@update');
+
 //if no route found
 Router::error('\core\error@index');
 
