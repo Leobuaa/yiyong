@@ -103,6 +103,13 @@ Router::any('/addRule', '\controllers\rule@add');
 Router::any('/deleteRule', '\controllers\rule@delete');
 Router::any('/updateRule', '\controllers\rule@update');
 
+//积分兑换记录 routes
+Router::any('getCreditExchange', '\controllers\creditexchange@get');
+Router::any('deleteCreditExchange', '\controllers\creditexchange@delete');
+
+//积分使用记录 routes
+Router::any('/getCreditUsage', '\controllers\creditusage@get');
+
 //if no route found
 Router::error('\core\error@index');
 
