@@ -49,4 +49,8 @@ class Present extends \core\model {
 
         return false;
     }
+
+    public function number() {
+        return count($this->_db->select("SELECT id FROM present"));
+    }
 }

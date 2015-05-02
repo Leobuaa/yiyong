@@ -11,4 +11,8 @@ class CreditUsage extends \core\model {
         return $this->_db->select("SELECT CU.id, CU.user_id AS userId, P.id AS presentId, P.name AS presentName, P.picture_url AS pictureUrl, description, credit, use_time AS useTime
                                    FROM credit_usage AS CU JOIN present AS P ON CU.present_id = P.id".$limitStatement);
     }
+
+    public function number() {
+        return count($this->_db->select("SELECT id FROM credit_usage"));
+    }
 }

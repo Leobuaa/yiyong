@@ -33,4 +33,8 @@ class CreditExchange extends \core\model {
 
         return false;
     }
+
+    public function number() {
+        return count($this->_db->select("SELECT id FROM credit_exchange WHERE availability = 1"));
+    }
 }

@@ -80,4 +80,11 @@ class ProductVersion extends \core\model {
         $data[$newKey] = $data[$oldKey];
         unset($data[$oldKey]);
     }
+
+    public function number($data) {
+        if ($data['categoryId'] == 0)
+            return count($this->_db->select("SELECT id FROM product_version"));
+        else
+            return count($this->_db->select("SELECT id FROM product_version WHERE category_id = :categoryId", array(':categoryId' => $data['categoryId'])));
+    }
 }

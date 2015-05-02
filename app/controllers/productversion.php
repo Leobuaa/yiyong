@@ -30,7 +30,7 @@ class ProductVersion extends \core\controller {
         $data = \helpers\parameter::getParameter(array('categoryId', 'page', 'size'));
 
         if ($data['page'] == null) $data['page'] = 1; // 若未传递参数则设定默认值
-        if ($data['size'] == null) $data['size'] = 10;
+        if ($data['size'] == null || $data['size'] == 0) $data['size'] = 10;
         if ($data['categoryId'] == null) $data['categoryId'] = 0;
 
         $isValid = \helpers\gump::is_valid($data, array(
@@ -42,6 +42,7 @@ class ProductVersion extends \core\controller {
         if ($isValid === true) {
             $this->response['success'] = true;
             $this->response['msg'] = $this->responseMsg['getSucceed'];
+            $this->response['page'] = ceil($this->model->number($data) / $data['size']);
             $this->response['data'] = $this->model->get($data);
         } else {
             $this->response['msg'] = $this->responseMsg['getFailed'];

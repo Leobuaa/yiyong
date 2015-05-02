@@ -35,7 +35,7 @@ class ConsumptionType extends \core\controller {
         $data = \helpers\parameter::getParameter(array('page', 'size'));
 
         if ($data['page'] == null) $data['page'] = 1; // 若未传参则设定默认值
-        if ($data['size'] == null) $data['size'] = 10;
+        if ($data['size'] == null || $data['size'] == 0) $data['size'] = 10;
 
         $isValid = \helpers\gump::is_valid($data, array(
             'page' => 'required|integer',
@@ -45,6 +45,7 @@ class ConsumptionType extends \core\controller {
         if ($isValid === true) {
             $this->response['success'] = true;
             $this->response['msg'] = $this->responseMsg['getSucceed'];
+            $this->response['page'] = ceil($this->model->number() / $data['size']);
             $this->response['data'] = $this->model->get($data);
         } else {
             $this->response['msg'] = $this->responseMsg['getFailed'];
