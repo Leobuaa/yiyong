@@ -15,7 +15,12 @@ class CreditExchange extends \core\model {
         if ($this->isExist($data['id'])) {
             $change = array('availability' => 0); //将该记录的有效性改为0
             $this->_db->update('credit_exchange', $change, array('id' => $data['id']));
-            // todo 扣除该用户的积分
+            //扣除该用户的积分
+            $creditExchange = $this->_db->select("SELECT user_id, credit FROM credit_exchange WHERE id = :id", array(':id' => $data['id']));
+            $userId = $creditExchange[0]->user_id;
+            $credit = $creditExchange[0]->credit;
+            $updateStatement = "UPDATE user SET credit = credit - $credit WHERE id = $userId";
+            $this->_db->exec($updateStatement);
             return true;
         } else {
             return false;

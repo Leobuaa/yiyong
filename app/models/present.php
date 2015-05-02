@@ -8,7 +8,7 @@ class Present extends \core\model {
 
     public function get($data) {
         $limitStatement = " LIMIT ".(($data['page'] - 1) * $data['size']).", ".$data['size'];
-        return $this->_db->select("SELECT * FROM present".$limitStatement);
+        return $this->_db->select("SELECT id, name, picture_url AS pictureUrl, description, credit FROM present".$limitStatement);
     }
 
     public function add($data) {
