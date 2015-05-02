@@ -110,6 +110,9 @@ Router::any('deleteCreditExchange', '\controllers\creditexchange@delete');
 //积分使用记录 routes
 Router::any('/getCreditUsage', '\controllers\creditusage@get');
 
+//发送短信 routes
+Router::any('/sendSMS', '\controllers\sms@send');
+
 //if no route found
 Router::error('\core\error@index');
 

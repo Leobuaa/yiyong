@@ -96,14 +96,17 @@ class Present extends \core\controller {
         $data = \helpers\parameter::getParameter(array('id', 'name', 'description', 'credit'));
 
         //存储图片
-        $isSaved = $this->saveImg($data);
-        if ($isSaved)
-            $this->deleteImg($data); // 只有在新的照片存储成功之后才会删除旧的照片
+        $isSaved = true;
+        if (!empty(($_FILES['picture']))) {
+            $isSaved = $this->saveImg($data);
+            if ($isSaved)
+                $this->deleteImg($data); // 只有在新的照片存储成功之后才会删除旧的照片
+        }
 
         $isValid = \helpers\gump::is_valid($data, array(
+            'id' => 'required|integer',
             'name' => 'required',
             'credit' => 'required|integer',
-            'picture_url' => 'required',
         ));
 
         if ($isValid === true && $isSaved == true) {
@@ -132,6 +135,8 @@ class Present extends \core\controller {
                     $upyun = new \UpYun(BUCKET_NAME, OPERATOR_NAME, OPERATOR_PWD);
                     $fileHandler = fopen($_FILES['picture']['tmp_name'], 'r');
                     $path = '/present/';
+                    $date = date('YmdHis',time());
+                    $filename = $date.$filename; // 为图片添加唯一时间的标识
                     try {
                         $upyun->writeFile($path.$filename, $fileHandler, true);
                     } catch(\Exception $e) {
