@@ -98,7 +98,7 @@ class Present extends \core\controller {
 
         //存储图片
         $isSaved = true;
-        if (!empty(($_FILES['picture']))) {
+        if (!empty($_FILES['picture'])) {
             $isSaved = $this->saveImg($data);
             if ($isSaved)
                 $this->deleteImg($data); // 只有在新的照片存储成功之后才会删除旧的照片
