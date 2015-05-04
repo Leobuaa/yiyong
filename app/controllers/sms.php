@@ -26,12 +26,46 @@ class SMS extends \core\controller {
             $smsData = array(
                 'username' => SMS_USERNAME,
                 'pwd' => md5(SMS_PWD),
-                'content' => $data['content'],
+                'msg' => $data['content'],
                 'p' => $data['phones'],
                 'isUrlEncode' => 'no',
+                'charSetStr' => 'utf',
             );
+            $url = 'http://api.app2e.com/smsBigSend.api.php';
+            $response = json_decode($this->sendPost($url, $smsData));
+            if ($response->status == '100') {
+                $this->response['success'] = true;
+                $this->response['msg'] = $this->responseMsg['sendSucceed'];
+            } else {
+                $this->response['msg'] = $this->responseMsg['sendFailed'];
+            }
         } else {
             $this->response['msg'] = $this->responseMsg['dataIsNotValid'];
         }
+
+        echo json_encode($this->response);
+    }
+
+    /**
+     * 发送post请求
+     * @param string $url 请求地址
+     * @param array $postDataArray post键值对数据
+     * @return string
+     */
+    function sendPost($url, $postDataArray) {
+
+        $postData = http_build_query($postDataArray);
+        $options = array(
+            'http' => array(
+                'method' => 'POST',
+                'header' => 'Content-type:application/x-www-form-urlencoded',
+                'content' => $postData,
+                'timeout' => 15 * 60 // 超时时间（单位:s）
+            )
+        );
+        $context = stream_context_create($options);
+        $result = file_get_contents($url, false, $context);
+
+        return $result;
     }
 }
