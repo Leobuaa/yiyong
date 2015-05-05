@@ -73,6 +73,24 @@ Router::post('/adminLogin', '\controllers\admin@login');
 Router::any('/adminLogout', '\controllers\admin@logout');
 Router::any('/adminIsLogin', '\controllers\admin@isLogin');
 
+//用户审核 routes
+Router::any('/getUserExamine','\controllers\userexamine@get');
+Router::any('/userExamine','\controllers\userexamine@examine');
+
+//用户管理 routes
+Router::any('/getUser', '\controllers\useradmin@get');
+Router::any('/addUser', '\controllers\useradmin@add');
+Router::any('/deleteUser', '\controllers\useradmin@delete');
+Router::any('/updateUser', '\controllers\useradmin@update');
+
+
+//客户经理管理 routes
+Router::any('/getManager', '\controllers\manageradmin@get');
+Router::any('/addManager', '\controllers\manageradmin@add');
+Router::any('/deleteManager', '\controllers\manageradmin@delete');
+Router::any('/updateManager', '\controllers\manageradmin@update');
+
+
 //产品类别 routes
 Router::any('/getProductCategory', '\controllers\productcategory@get');
 Router::any('/addProductCategory', '\controllers\productcategory@add');
