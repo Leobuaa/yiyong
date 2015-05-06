@@ -131,6 +131,10 @@ Router::any('/getCreditUsage', '\controllers\creditusage@get');
 //发送短信 routes
 Router::any('/sendSMS', '\controllers\sms@send');
 
+//用户 routes
+Router::any('/getUserStatus', '\controllers\user@getUserStatus');
+Router::any('/userRegister', '\controllers\user@register');
+
 //if no route found
 Router::error('\core\error@index');
 
