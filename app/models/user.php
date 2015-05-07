@@ -36,6 +36,18 @@ class User extends \core\model {
             return false;
     }
 
+    public function login($data) {
+        $user = $this->_db->select("SELECT id, password FROM user WHERE company = :company AND availability = 1", array(':company' => $data['company']));
+        if (count($user) > 0 && $user[0]->password == md5($data['password'])) {
+            $userBinding['user_id'] = $user[0]->id;
+            $userBinding['third_part_id'] = $data['wechatId'];
+            $this->_db->insert('user_binding', $userBinding);
+            return true;
+        }
+        else
+            return false;
+    }
+
     /**
      * 判断该第三方用户是否绑定
      * @param $wechatId

@@ -134,6 +134,7 @@ Router::any('/sendSMS', '\controllers\sms@send');
 //用户 routes
 Router::any('/getUserStatus', '\controllers\user@getUserStatus');
 Router::any('/userRegister', '\controllers\user@register');
+Router::any('/userLogin', '\controllers\user@login');
 
 //if no route found
 Router::error('\core\error@index');
