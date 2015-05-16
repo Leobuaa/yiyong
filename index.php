@@ -135,6 +135,7 @@ Router::any('/sendSMS', '\controllers\sms@send');
 Router::any('/getUserStatus', '\controllers\user@getUserStatus');
 Router::any('/userRegister', '\controllers\user@register');
 Router::any('/userLogin', '\controllers\user@login');
+Router::any('/creditExchange', '\controllers\user@creditExchange');
 
 //if no route found
 Router::error('\core\error@index');

@@ -17,6 +17,9 @@ class SMS extends \core\controller {
         );
     }
 
+    /**
+     * 群发短信给指定会员
+     */
     public function send() {
         $data = \helpers\parameter::getParameter(array('content', 'phones'));
 
@@ -67,5 +70,36 @@ class SMS extends \core\controller {
         $result = file_get_contents($url, false, $context);
 
         return $result;
+    }
+
+    /**
+     * 外部调用发送短信的接口
+     * @param $data
+     */
+    public function sendMessage($data) {
+        $isValid = \helpers\gump::is_valid($data, array('content' => 'required', 'phones' => 'required'));
+
+        if ($isValid) {
+            $smsData = array(
+                'username' => SMS_USERNAME,
+                'pwd' => md5(SMS_PWD),
+                'msg' => $data['content'],
+                'p' => $data['phones'],
+                'isUrlEncode' => 'no',
+                'charSetStr' => 'utf',
+            );
+            $url = 'http://api.app2e.com/smsBigSend.api.php';
+            $response = json_decode($this->sendPost($url, $smsData));
+            if ($response->status == '100') {
+                $this->response['success'] = true;
+                $this->response['msg'] = $this->responseMsg['sendSucceed'];
+            } else {
+                $this->response['msg'] = $this->responseMsg['sendFailed'];
+            }
+        } else {
+            $this->response['msg'] = $this->responseMsg['dataIsNotValid'];
+        }
+
+        echo json_encode($this->response);
     }
 }

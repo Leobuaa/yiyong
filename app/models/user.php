@@ -76,4 +76,51 @@ class User extends \core\model {
             return 0; // 该公司尚未注册
         }
     }
+
+    public function addCreditExchange($data) {
+        // 将字段的驼峰命名改为数据库所用的下划线
+        $row = array(
+            'product_category' => $data['productCategory'],
+            'product_version' => $data['productVersion'],
+            'consumption_type' => $data['consumptionType'],
+            'manager_name' => $data['managerName'],
+            'money' => $data['money'],
+            'credit' => $this->calculateCredit($data),
+            'user_id' => $this->getUserIdByWechatId($data['wechatId']),
+        );
+        return $this->_db->insert('credit_exchange', $row);
+    }
+
+    /**
+     * 根据消费类别计算用户所得积分
+     * @param $data
+     * @return float
+     */
+    private function calculateCredit($data) {
+        $consumptionType = $data['consumptionType'];
+        $money = $data['money'];
+        switch ($consumptionType) {
+            case "软件费":
+                return floor($money);
+            case "实施费":
+            case "开发费":
+            case "服务费":
+                return floor($money/10);
+        }
+    }
+
+    /**
+     * 根据用户微信id获取公司user的id, 若不存在则返回0
+     * @param $wechatId
+     * @return int
+     */
+    private function getUserIdByWechatId($wechatId) {
+        $userBinding = $this->_db->select("SELECT user_id FROM user_binding WHERE third_part_id = :wechatId", array(':wechatId' => $wechatId));
+        if (count($userBinding) > 0)
+            return $userBinding[0]->user_id;
+        else
+            return 0;
+    }
+
+
 }

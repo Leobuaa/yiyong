@@ -1,5 +1,28 @@
 <h3>Exception information:</h3>
 
+		<p><strong>Date:</strong> May 15, 2015 23:27PM</p>
+
+		<p><strong>Message:</strong> SQLSTATE[42S22]: Column not found: 1054 Unknown column 'consumptionType' in 'field list'</p>
+
+		<p><strong>Code:</strong> 42S22</p>
+
+		<p><strong>File:</strong> /Users/leo/Documents/code/yiyong/app/helpers/database.php</p>
+
+		<p><strong>Line:</strong> 114</p>
+
+		<h3>Stack trace:</h3>
+
+		<pre>#0 /Users/leo/Documents/code/yiyong/app/helpers/database.php(114): PDOStatement->execute()
+#1 /Users/leo/Documents/code/yiyong/app/models/user.php(92): helpers\Database->insert('credit_exchange', Array)
+#2 /Users/leo/Documents/code/yiyong/app/controllers/user.php(144): models\User->addCreditExchange(Array)
+#3 /Users/leo/Documents/code/yiyong/app/core/router.php(85): controllers\User->creditExchange()
+#4 /Users/leo/Documents/code/yiyong/app/core/router.php(219): core\Router::invokeObject('\\controllers\\us...', Array)
+#5 /Users/leo/Documents/code/yiyong/index.php(147): core\Router::dispatch()
+#6 {main}</pre>
+
+		<hr />
+<h3>Exception information:</h3>
+
 		<p><strong>Date:</strong> May 05, 2015 14:55PM</p>
 
 		<p><strong>Message:</strong> SQLSTATE[42S22]: Column not found: 1054 Unknown column 'avaiability' in 'where clause'</p>
